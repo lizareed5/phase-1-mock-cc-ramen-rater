@@ -19,8 +19,8 @@ const fetchRamen = (ramen) => {
     fetch(url)
     .then((response => response.json()))
     .then((data) => data.map(ramen => renderRamen(ramen)))
-    }
-    
+}
+
 // Click on an image from the #ramen-menu div and see all the info about that ramen displayed inside the #ramen-detail div and where it says insert comment here and insert rating here.
 
 const renderRamen = (ramen) => {
@@ -29,7 +29,7 @@ const renderRamen = (ramen) => {
     ramenImg.addEventListener('click', () =>
     ramenInfo(ramen))
     ramenMenu.appendChild(ramenImg)
-    }
+}
 
 const ramenInfo = (ramen) => {
     ramenMainPic.src = ramen.image,
@@ -37,6 +37,12 @@ const ramenInfo = (ramen) => {
     ramenRest.innerText = ramen.restaurant
     ramenRating.innerText = ramen.rating
     ramenComment.innerText = ramen.comment
+    let deleteBtn = document.createElement("button")
+    deleteBtn.innerText = "Delete"
+    deleteBtn.addEventListener("click", () => {
+    ramenInfo.remove()
+})
+    ramenComment.appendChild(deleteBtn)
 }
 
 // Create a new ramen after submitting the new-ramen form. The new ramen should be added to the#ramen-menu div. The new ramen does not need to persist; in other words, if you refresh the page, it's okay that the new ramen is no longer on the page
@@ -64,4 +70,7 @@ const keepNewRamen = (newRamen) => {
         body: JSON.stringify(newRamen)
     })
     renderRamen(newRamen)
+}
+
+const deleteRamen = (e) => {
 }
